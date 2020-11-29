@@ -20,11 +20,14 @@
   },
   "homepage": "https://github.com/cramos711/adoptable#readme",
   "dependencies": {
+    "@frontendmasters/pet": "^1.0.3",
+    "@petfinder/petfinder-js": "^1.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
