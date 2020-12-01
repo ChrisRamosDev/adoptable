@@ -1,12 +1,16 @@
 import React from "react";
+
+import Logo from "../images/Adoptable.png";
 import SearchPets from "./SearchPets";
 
 const App = () => {
   return (
-    <div>
-      <h1>I'm working now</h1>
+    <>
+      <header>
+        <img src={Logo} alt="adoptable" className="header-logo" />
+      </header>
       <SearchPets />
-    </div>
+    </>
   );
 };
 
