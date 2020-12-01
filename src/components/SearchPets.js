@@ -1,7 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Client } from "@petfinder/petfinder-js";
+import { Results } from "./Results";
 
 const SearchPets = () => {
+  const [pets, setPets] = useState([]);
+  const [location, setLocation] = useState("Orlando");
+  const [type, setType] = useState("Dog");
+
   const client = new Client({
     apiKey: process.env.REACT_APP_API_KEY,
     secret: process.env.REACT_APP_API_SECRET,
@@ -9,18 +14,45 @@ const SearchPets = () => {
 
   useEffect(() => {
     client.animal
-      .search({ limit: 30, location: `FL`, type: "Dog" })
+      .search({ limit: 30, location: `${location}, FL`, type: type })
       .then((res) => {
-        console.log(res.data.animals);
+        setPets(res.data.animals);
       }, console.error);
-    client.animalData.types().then((res) => {
-      console.log(res.data.types);
-    }, console.error);
-  }, []);
+  }, [type, location]);
 
   return (
     <div className="search-pets">
-      <h1>Getting that data!</h1>
+      <form>
+        <label htmlFor="location">
+          Enter City
+          <input
+            id="location"
+            value={location}
+            placeholder="location"
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </label>
+        <br />
+        <label htmlFor="type">Type</label>
+        <select
+          name="type"
+          id="type"
+          onChange={(e) => setType(e.target.value)}
+          onBlur={(e) => setType(e.target.value)}
+        >
+          <option value="Dog">Dogs</option>
+          <options value="Cat">Cats</options>
+        </select>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            console.log(pets);
+          }}
+        >
+          Submit
+        </button>
+      </form>
+      <Results pets={pets} />
     </div>
   );
 };
