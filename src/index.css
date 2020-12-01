@@ -1,3 +1,6 @@
 body {
   background: url("./images/bg-pets.png"), #a1c9e7;
+  color: #333;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
