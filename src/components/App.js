@@ -10,6 +10,9 @@ const App = () => {
         <img src={Logo} alt="adoptable" className="header-logo" />
       </header>
       <SearchPets />
+      <footer>
+        <h2>©2020 Chris Ramos Dev</h2>
+      </footer>
     </>
   );
 };

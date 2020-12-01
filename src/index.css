@@ -8,6 +8,16 @@ body {
   background: url("./images/bg-pets.png"), #a1c9e7;
   color: #333;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  padding: 0;
+  margin: 0;
 }
 
 img {
@@ -31,6 +41,18 @@ header {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+footer {
+  color: #fff;
+  background-color: #3695da;
+  padding: 0.75rem 0.5rem;
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .header-logo {
   margin: 0 auto;
 }
@@ -49,9 +71,14 @@ header {
 }
 
 @media (min-width: 769px) {
+  header {
+    padding-left: 2.5rem;
+  }
+
   .search-form {
-    margin-left: 2rem;
+    margin-left: 5.5rem;
     margin-top: 2rem;
+    border-radius: 8px;
   }
 }
 
@@ -63,14 +90,10 @@ header {
   display: none;
 }
 
-.results-list {
-  display: none;
-}
-
-.expanded,
-.show-results {
+.expanded {
   display: block;
 }
+
 .form-buttons {
   display: flex;
   align-items: center;
@@ -102,4 +125,68 @@ header {
 #additional-options_btn:hover,
 #additional-options_btn:focus {
   color: #fff;
+}
+
+.spacer {
+  margin-bottom: 15px;
+}
+
+.results-list {
+  display: none;
+}
+
+.results-list.show-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 250px));
+  gap: 2rem;
+  list-style-type: none;
+  margin: 0 auto;
+  justify-content: center;
+  padding: 0 1rem 5.5rem;
+}
+
+.pet-result {
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.pet-result:hover,
+.pet-result:focus {
+  transform: scale(1.01);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.pet-age {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: absolute;
+  background-color: #fff;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.pet-img {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+  header {
+    padding-left: 5.5rem;
+  }
+
+  .mq-flex {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
 }

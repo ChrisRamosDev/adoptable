@@ -5,9 +5,9 @@ const AdvancedSearch = ({ pets, onChange }) => {
     <>
       <hr className="additional-options" />
       <div className="additional-options">
-        <label htmlFor="age">
+        <label htmlFor="age" className="spacer">
           Age
-          <select name="age" id="age" onChange={onChange}>
+          <select name="age" id="age" onChange={onChange} className="spacer">
             <option value="all">All</option>
             <option value="baby">Baby</option>
             <option value="young">Young</option>

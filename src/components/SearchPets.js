@@ -15,6 +15,7 @@ const SearchPets = () => {
     secret: process.env.REACT_APP_API_SECRET,
   });
 
+  // api call for pet data
   useEffect(() => {
     client.animal
       .search({
@@ -29,6 +30,7 @@ const SearchPets = () => {
       }, console.error);
   }, [type, location, age]);
 
+  // expand additional options inputs
   const expandOptions = (e) => {
     e.preventDefault();
     const options = document.querySelectorAll(".additional-options");
@@ -38,12 +40,15 @@ const SearchPets = () => {
     });
   };
 
+  // display search results
   const showResults = (e) => {
     e.preventDefault();
     const results = document.querySelector(".results-list");
     results.classList.toggle("show-results");
+    console.log(pets, age, breed, type);
   };
 
+  // organize breeds into set of unique values
   let petBreeds = [];
   pets.forEach((pet) => {
     petBreeds.push(pet.breeds.primary);
@@ -51,8 +56,8 @@ const SearchPets = () => {
   petBreeds = [...new Set(petBreeds)];
 
   return (
-    <div className="search-pets">
-      <form className="search-form spacer">
+    <div className="search-pets mq-flex">
+      <form className="search-form">
         <label htmlFor="location">
           Enter City
           <br />
@@ -92,7 +97,7 @@ const SearchPets = () => {
           Search
         </button>
       </form>
-      <Results pets={pets} />
+      <Results pets={pets} type={type} />
     </div>
   );
 };
