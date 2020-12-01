@@ -38,6 +38,7 @@ header {
 .search-form {
   max-width: 350px;
   min-width: 280px;
+  margin: 0 auto;
   background-color: #274f6c;
   color: #fff;
   display: flex;
@@ -45,6 +46,13 @@ header {
   padding: 1rem 1rem 1.5rem;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+}
+
+@media (min-width: 769px) {
+  .search-form {
+    margin-left: 2rem;
+    margin-top: 2rem;
+  }
 }
 
 .search-form > * + * {
@@ -84,7 +92,7 @@ header {
 }
 
 #additional-options_btn {
-  width: 170px;
+  width: 160px;
   font-size: 1rem;
   border: none;
   color: #ccc;

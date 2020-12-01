@@ -19,12 +19,8 @@ const AdvancedSearch = ({ pets, onChange }) => {
           Breeds
           <select name="breeds" id="breeds">
             <option value="">Any</option>
-            {pets.map((pet) => {
-              return (
-                <option key={pet.id} value={pet.breeds.primary}>
-                  {pet.breeds.primary}
-                </option>
-              );
+            {pets.map((breed) => {
+              return <option key={breed}>{breed}</option>;
             })}
           </select>
         </label>

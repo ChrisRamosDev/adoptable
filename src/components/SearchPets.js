@@ -8,6 +8,7 @@ const SearchPets = () => {
   const [location, setLocation] = useState("Orlando");
   const [type, setType] = useState("Dog");
   const [age, setAge] = useState("");
+  const [breed, setBreed] = useState("");
 
   const client = new Client({
     apiKey: process.env.REACT_APP_API_KEY,
@@ -21,6 +22,7 @@ const SearchPets = () => {
         location: `${location}, FL`,
         type: type,
         age: age,
+        breed: breed,
       })
       .then((res) => {
         setPets(res.data.animals);
@@ -41,6 +43,12 @@ const SearchPets = () => {
     const results = document.querySelector(".results-list");
     results.classList.toggle("show-results");
   };
+
+  let petBreeds = [];
+  pets.forEach((pet) => {
+    petBreeds.push(pet.breeds.primary);
+  });
+  petBreeds = [...new Set(petBreeds)];
 
   return (
     <div className="search-pets">
@@ -73,9 +81,11 @@ const SearchPets = () => {
           + Additional Options
         </button>
         <AdvancedSearch
-          pets={pets}
+          pets={petBreeds}
           onChange={(e) => {
-            setAge(e.target.value);
+            e.target === "select#age"
+              ? setAge(e.target.value)
+              : setBreed(e.target.value);
           }}
         />
         <button id="search-btn" onClick={showResults}>
