@@ -1,15 +1,9 @@
 import React, { Component } from "react";
 import { Client } from "@petfinder/petfinder-js";
+import Carousel from "./Carousel";
 
 class Details extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true,
-    };
-  }
-
+  state = { loading: true };
   componentDidMount() {
     const pet = new Client({
       apiKey: process.env.REACT_APP_API_KEY,
@@ -32,16 +26,17 @@ class Details extends Component {
 
   render() {
     if (this.state.loading) {
-      return <h1>Loading...</h1>;
+      return <h1 className="loading">Loading...</h1>;
     }
 
     const { animal, breed, location, description, name, media } = this.state;
 
     return (
       <div className="details">
-        <div className="hero-container">
+        <Carousel media={media} />
+        {/* <div className="hero-container">
           <img src={media[0].full} alt="cutie pie" />
-        </div>
+        </div> */}
         <div className="info">
           <h1>{name}</h1>
           <h2>{`${breed} - ${location}`}</h2>

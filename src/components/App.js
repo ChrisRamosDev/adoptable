@@ -18,7 +18,7 @@ const App = () => {
         <Details path="/details/:id" />
       </Router>
       <footer>
-        <h2>©2020 Chris Ramos Dev</h2>
+        <h2>©2020 Chris Ramos</h2>
       </footer>
     </>
   );

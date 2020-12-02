@@ -3,7 +3,7 @@ import { Pet } from "./Pet";
 
 const Results = ({ pets }) => {
   return (
-    <div className="results-list show-results">
+    <div className="results-list">
       {pets.map((pet) => {
         return (
           <Pet

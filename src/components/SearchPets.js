@@ -28,6 +28,7 @@ const SearchPets = () => {
         location: location ? `${location}, FL` : "FL",
         type: type,
         breed: breed,
+        status: "adoptable",
       })
       .then((res) => {
         const animals = res.data.animals;
