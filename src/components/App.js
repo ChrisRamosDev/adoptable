@@ -1,15 +1,22 @@
 import React from "react";
+import { Link, Router } from "@reach/router";
 
 import Logo from "../images/Adoptable.png";
 import SearchPets from "./SearchPets";
+import Details from "./Details";
 
 const App = () => {
   return (
     <>
       <header>
-        <img src={Logo} alt="adoptable" className="header-logo" />
+        <Link to="/">
+          <img src={Logo} alt="adoptable" className="header-logo" />
+        </Link>
       </header>
-      <SearchPets />
+      <Router>
+        <SearchPets path="/" />
+        <Details path="/details/:id" />
+      </Router>
       <footer>
         <h2>©2020 Chris Ramos Dev</h2>
       </footer>

@@ -55,7 +55,7 @@ footer {
 
 button {
   cursor: pointer;
-  width: 100px;
+  width: 150px;
   font-size: 1.25rem;
   color: #fff;
   border: 2px solid white;
@@ -142,7 +142,7 @@ button:focus {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.pet-img {
+.image-container img {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   width: 100%;
@@ -158,5 +158,51 @@ button:focus {
   .mq-flex {
     max-width: 1500px;
     margin: 0 auto;
+  }
+}
+
+.details {
+  background-color: #3695da;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 8rem;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.hero-container img {
+  max-height: 400px;
+  border-radius: 0;
+}
+
+.info {
+  padding: 2rem;
+}
+
+.info button {
+  background-color: mediumseagreen;
+}
+.info button:hover,
+.info button:focus {
+  background-color: palegreen;
+}
+
+.info > * + * {
+  margin-top: 15px;
+}
+
+@media (min-width: 769px) {
+  .details {
+    flex-direction: row;
+    margin-top: 2.5rem;
+  }
+
+  .hero-container img {
+    border-bottom-left-radius: 5px;
   }
 }

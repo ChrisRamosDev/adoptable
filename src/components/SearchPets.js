@@ -21,6 +21,7 @@ const SearchPets = () => {
 
   const requestPetData = async () => {
     console.log("requesting data...");
+    // await pet.animal.show(49940184).then(console.log, console.error);
     await pet.animal
       .search({
         limit: 30,
@@ -31,7 +32,6 @@ const SearchPets = () => {
       .then((res) => {
         const animals = res.data.animals;
         setPets(animals || []);
-        console.log(location, type, breed, age, animals);
       }, console.error);
   };
 

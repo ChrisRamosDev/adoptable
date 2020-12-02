@@ -1,30 +1,20 @@
 import React from "react";
-import Pupholder from "../images/placeholder-dog.png";
+import { Pet } from "./Pet";
 
 const Results = ({ pets }) => {
   return (
     <div className="results-list show-results">
       {pets.map((pet) => {
         return (
-          <div key={pet.id} className="pet-result">
-            <h4 className="pet-age">{pet.age}</h4>
-            {pet.photos.length > 0 ? (
-              <img
-                src={pet.photos[0].medium}
-                alt="cutie pie"
-                className="pet-img"
-              />
-            ) : (
-              <img
-                src={Pupholder}
-                alt="no puppy photo"
-                className="pet-img placeholder"
-              />
-            )}
-            <h2 className="pet-name">{pet.name}</h2>
-            <h4 className="pet-size">{pet.size}</h4>
-            <h3 className="pet-breed">{pet.breeds.primary}</h3>
-          </div>
+          <Pet
+            key={pet.id}
+            id={pet.id}
+            name={pet.name}
+            age={pet.age}
+            media={pet.photos}
+            size={pet.size}
+            breed={pet.breeds.primary}
+          />
         );
       })}
     </div>
