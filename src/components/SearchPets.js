@@ -1,63 +1,59 @@
 import React, { useState, useEffect } from "react";
 import { Client } from "@petfinder/petfinder-js";
-import { Results } from "./Results";
-import AdvancedSearch, { ageArray } from "./AdvancedSearch";
+import useDropdown from "./useDropdown";
+import Results from "./Results";
 
 const SearchPets = () => {
-  const [pets, setPets] = useState([]);
-  const [location, setLocation] = useState("Orlando");
-  const [type, setType] = useState("Dog");
-  const [age, setAge] = useState("");
-  const [breed, setBreed] = useState("");
-
-  const client = new Client({
+  const pet = new Client({
     apiKey: process.env.REACT_APP_API_KEY,
     secret: process.env.REACT_APP_API_SECRET,
   });
 
-  // api call for pet data
-  useEffect(() => {
-    client.animal
+  let typeOptions = ["Dog", "Cat"];
+  let ageOptions = ["baby", "young", "adult", "senior"];
+
+  const [location, setLocation] = useState("Orlando");
+  const [breeds, setBreeds] = useState([]);
+  const [type, TypeDropdown] = useDropdown("Type", "Dog", typeOptions);
+  const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
+  const [age, AgeDropdown] = useDropdown("Age", "", ageOptions);
+  const [pets, setPets] = useState([]);
+
+  const requestPetData = async () => {
+    console.log("requesting data...");
+    await pet.animal
       .search({
         limit: 30,
-        location: `${location}, FL`,
+        location: location ? `${location}, FL` : "FL",
         type: type,
-        age: age,
         breed: breed,
       })
       .then((res) => {
-        setPets(res.data.animals);
+        const animals = res.data.animals;
+        setPets(animals || []);
+        console.log(location, type, breed, age, animals);
       }, console.error);
-  }, [type, location, age]);
-
-  // expand additional options inputs
-  const expandOptions = (e) => {
-    e.preventDefault();
-    const options = document.querySelectorAll(".additional-options");
-
-    options.forEach((element) => {
-      element.classList.toggle("expanded");
-    });
   };
 
-  // display search results
-  const showResults = (e) => {
-    e.preventDefault();
-    const results = document.querySelector(".results-list");
-    results.classList.toggle("show-results");
-    console.log(pets, age, breed, type);
-  };
-
-  // organize breeds into set of unique values
-  let petBreeds = [];
-  pets.forEach((pet) => {
-    petBreeds.push(pet.breeds.primary);
-  });
-  petBreeds = [...new Set(petBreeds)];
+  // api call for pet data
+  useEffect(() => {
+    setBreeds([]);
+    setBreed("");
+    pet.animalData.breeds(type).then((res) => {
+      const breedNames = res.data.breeds.map(({ name }) => name);
+      setBreeds(breedNames);
+    }, console.error);
+  }, [type, setBreed, setBreeds]);
 
   return (
     <div className="search-pets mq-flex">
-      <form className="search-form">
+      <form
+        className="search-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestPetData();
+        }}
+      >
         <label htmlFor="location">
           Enter City
           <br />
@@ -68,36 +64,12 @@ const SearchPets = () => {
             onChange={(e) => setLocation(e.target.value)}
           />
         </label>
-        <label htmlFor="type">
-          Type
-          <br />
-          <select
-            name="type"
-            id="type"
-            onChange={(e) => setType(e.target.value)}
-            onBlur={(e) => setType(e.target.value)}
-          >
-            <option value="Dog">Dogs</option>
-            <option value="Cat">Cats</option>
-          </select>
-        </label>
-
-        <button id="additional-options_btn" onClick={expandOptions}>
-          + Additional Options
-        </button>
-        <AdvancedSearch
-          pets={petBreeds}
-          onChange={(e) => {
-            e.target === "select#age"
-              ? setAge(e.target.value)
-              : setBreed(e.target.value);
-          }}
-        />
-        <button id="search-btn" onClick={showResults}>
-          Search
-        </button>
+        <TypeDropdown />
+        <BreedDropdown />
+        <AgeDropdown />
+        <button>Search</button>
       </form>
-      <Results pets={pets} type={type} />
+      <Results pets={pets} />
     </div>
   );
 };

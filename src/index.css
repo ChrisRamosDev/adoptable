@@ -53,6 +53,21 @@ footer {
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
 }
 
+button {
+  cursor: pointer;
+  width: 100px;
+  font-size: 1.25rem;
+  color: #fff;
+  border: 2px solid white;
+  border-radius: 3px;
+  background-color: #3695da;
+}
+
+button:hover,
+button:focus {
+  background-color: #ccc;
+}
+
 .header-logo {
   margin: 0 auto;
 }
@@ -86,53 +101,8 @@ footer {
   margin-top: 15px;
 }
 
-.additional-options {
-  display: none;
-}
-
-.expanded {
-  display: block;
-}
-
-.form-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.search-pets button {
-  width: 100px;
-  font-size: 1.25rem;
-  color: #fff;
-  border: 2px solid white;
-  border-radius: 3px;
-  background-color: #3695da;
-}
-
-.search-pets button:hover,
-.search-pets button:focus {
-  background-color: #ccc;
-}
-
-#additional-options_btn {
-  width: 160px;
-  font-size: 1rem;
-  border: none;
-  color: #ccc;
-  background-color: transparent;
-}
-
-#additional-options_btn:hover,
-#additional-options_btn:focus {
-  color: #fff;
-}
-
 .spacer {
   margin-bottom: 15px;
-}
-
-.results-list {
-  display: none;
 }
 
 .results-list.show-results {
