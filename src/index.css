@@ -81,6 +81,11 @@ button:focus {
   grid-template-rows: 80px auto 60px;
 }
 
+select,
+input {
+  font-size: 1em;
+}
+
 .header-logo {
   margin: 0 auto;
 }
