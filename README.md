@@ -1,4 +1,4 @@
-![Netlify Status](https://api.netlify.com/api/v1/badges/da8e084d-5789-458b-a096-fe9ccffa2b5b/deploy-status)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/da8e084d-5789-458b-a096-fe9ccffa2b5b/deploy-status)](https://itsadoptable.netlify.app/)
 
 # Adoptable
 
