@@ -3,8 +3,11 @@ import { Client } from "@petfinder/petfinder-js";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 
+import { navigate } from "@reach/router";
+import Modal from "./Modal";
+
 class Details extends Component {
-  state = { loading: true };
+  state = { loading: true, showModal: false };
 
   componentDidMount() {
     const pet = new Client({
@@ -15,6 +18,7 @@ class Details extends Component {
     pet.animal.show(this.props.id).then((res) => {
       let animal = res.data.animal;
       this.setState({
+        url: animal.url,
         name: animal.name,
         animal: animal.type,
         location: `${animal.contact.address.city} ${animal.contact.address.state}`,
@@ -26,24 +30,42 @@ class Details extends Component {
     }, console.error);
   }
 
+  toggleModal = () => this.setState({ showModal: !this.state.showModal });
+  adopt = () => navigate(this.state.url);
+
   render() {
     if (this.state.loading) {
       return <h1 className="loading">Loading...</h1>;
     }
 
-    const { animal, breed, location, description, name, media } = this.state;
+    const {
+      animal,
+      breed,
+      location,
+      description,
+      name,
+      media,
+      showModal,
+    } = this.state;
 
     return (
       <div className="details">
         <Carousel media={media} />
-        {/* <div className="hero-container">
-          <img src={media[0].full} alt="cutie pie" />
-        </div> */}
         <div className="info">
           <h1>{name}</h1>
           <h2>{`${breed} - ${location}`}</h2>
           <p>{description}</p>
-          <button>Adopt {name}</button>
+          <button onClick={this.toggleModal}>Adopt {name}</button>
+          {showModal ? (
+            <Modal>
+              <div>
+                <h1>Would you like to adopt {name}?</h1>
+                <button onClick={this.adopt}>Yes!</button>
+                <button onClick={this.toggleModal}>No</button>
+                <p>This will direct you to the adoption page.</p>
+              </div>
+            </Modal>
+          ) : null}
         </div>
       </div>
     );

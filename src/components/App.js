@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Router } from "@reach/router";
 
 import Logo from "../images/Adoptable.png";

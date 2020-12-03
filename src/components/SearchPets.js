@@ -11,6 +11,7 @@ const SearchPets = () => {
 
   let typeOptions = ["Dog", "Cat"];
   let ageOptions = ["baby", "young", "adult", "senior"];
+  let limitAmount = [30, 50, 70, 100];
 
   const [location, setLocation] = useState("Orlando");
   const [breeds, setBreeds] = useState([]);
@@ -18,16 +19,21 @@ const SearchPets = () => {
   const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
   const [age, AgeDropdown] = useDropdown("Age", "", ageOptions);
   const [pets, setPets] = useState([]);
+  const [limit, LimitDropdown] = useDropdown(
+    "Total search results",
+    30,
+    limitAmount
+  );
 
   const requestPetData = async () => {
     console.log("requesting data...");
-    // await pet.animal.show(49940184).then(console.log, console.error);
     await pet.animal
       .search({
-        limit: 30,
+        limit: limit,
         location: location ? `${location}, FL` : "FL",
         type: type,
         breed: breed,
+        age: age,
         status: "adoptable",
       })
       .then((res) => {
@@ -68,6 +74,7 @@ const SearchPets = () => {
         <TypeDropdown />
         <BreedDropdown />
         <AgeDropdown />
+        <LimitDropdown />
         <button>Search</button>
       </form>
       <Results pets={pets} />

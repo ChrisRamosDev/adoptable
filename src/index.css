@@ -233,3 +233,28 @@ button:focus {
   margin: 0.5rem;
   border-radius: 10px;
 }
+
+/* Modal */
+.modal {
+  position: absolute;
+  top: 90px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal div {
+  max-width: 400px;
+  padding: 1rem;
+  margin: 10rem auto;
+  text-align: center;
+  color: #fff;
+  border: 2px solid #fff;
+  background-color: #3695da;
+  border-radius: 3px;
+}
+
+.modal button {
+  margin: 10px;
+}
